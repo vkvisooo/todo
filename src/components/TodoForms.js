@@ -34,6 +34,11 @@ export default function TodoForm(props) {
   }
   console.log('Form render')
   return (
-    <Input {...inputProps}/>
+    <>
+      <Input {...inputProps}/>
+      {state.todoListData[props.activeTodo].includes(todo) && 
+        <p className="text-danger pt-2 mb-0">Already exist</p>
+      }
+    </>
   );
 }

@@ -44,7 +44,7 @@ export default function reducer(state = initalValues, action) {
         return state;
       }
       // return current state if duplicate
-      if (state.todos.includes(action.payload)) {
+      if (state.todoListData[action.payload.key].includes(action.payload.todo)) {
         return state;
       }
       return {
@@ -60,6 +60,7 @@ export default function reducer(state = initalValues, action) {
       };
     
     case "TODO_TYPE_LIST":
+      if (state.todoTypelist.includes(action.payload)) return state;
       return {
         ...state,
         todoTypelist: addTodoDetail(state, action.payload),
