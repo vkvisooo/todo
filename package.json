@@ -1,8 +1,8 @@
 {
-  "name": "react-todo-app-hooks-and-context",
+  "name": "h2-project-2019",
   "private": true,
   "version": "1.0.0",
-  "description": "A highly testable TodoList app that uses React hooks and Context.",
+  "description": "Todo list",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

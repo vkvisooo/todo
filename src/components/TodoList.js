@@ -1,21 +1,24 @@
 import React, { useContext } from "react";
-import Store from "../context";
+import Store from "../context/context";
 import { TodoHeader } from "./TodoHeader";
 
-export default function TodoList() {
+export default function TodoList(props) {
+  const activeTodo = props.activeTodo.split(' ').join('_');
   const { state, dispatch } = useContext(Store);
+  const todoList = state.todoListData[activeTodo] || [];
 
   const pluralize = count =>
-    count > 1 ? `There are ${count} todos.` : `There is ${count} todo.`;
+    count > 1 ? ` ${count} Todos` : `${count} Todo`;
 
   let header =
-    state.todos.length === 0 ? (
-      <h4>Yay! All todos are done! Take a rest!</h4>
+    todoList.length === 0 ? (
+      <h4>Nothing to show, create todos</h4>
     ) : (
-      <TodoHeader>
-        <span className="float-right">{pluralize(state.todos.length)}</span>
-      </TodoHeader>
-    );
+        <TodoHeader>
+          <span className="float-right">{pluralize(todoList.length)}</span>
+        </TodoHeader>
+      );
+  console.log('list render')
   return (
     <div className="row">
       <div className="col-md-12">
@@ -25,24 +28,25 @@ export default function TodoList() {
             {header}
           </div>
         </div>
-        <div className="row">
+        {todoList && todoList.length > 0 && (<div className="row">
           <div className="col-md-12">
             <ul className="list-group">
-              {state.todos.map(t => (
-                <li key={t} className="list-group-item">
-                  {t}
+              {todoList.map(todo => (
+                <li key={todo} className="list-group-item">
+                  {todo}
                   <button
-                    className="float-right btn btn-danger btn-sm"
+                    className="float-right btn btn-success btn-sm"
                     style={{ marginLeft: 10 }}
-                    onClick={() => dispatch({ type: "COMPLETE", payload: t })}
+                    onClick={() => dispatch({ type: "COMPLETE", payload: { key: activeTodo, todo } })}
                   >
-                    Complete
+                    Mark Done
                   </button>
                 </li>
               ))}
             </ul>
           </div>
         </div>
+        )}
       </div>
     </div>
   );
