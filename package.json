@@ -1,28 +1,28 @@
 {
-  "name": "h2-project-2019",
-  "private": true,
-  "version": "1.0.0",
-  "description": "Todo list",
-  "keywords": [],
-  "main": "src/index.js",
-  "dependencies": {
-    "enzyme": "3.7.0",
-    "enzyme-adapter-react-16": "1.6.0",
-    "react": "next",
-    "react-dom": "next",
-    "react-scripts": "2.0.3"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "name": "h2-project-2019",
+    "private": true,
+    "main": "src/index.js",
+    "keywords": [],
+    "description": "Todo list",
+    "version": "1.0.0",
+    "browserslist": [
+        "not op_mini all",
+        "not ie <= 11",
+        ">0.2%",
+        "not dead"
+    ],
+    "devDependencies": {},
+    "scripts": {
+        "test": "react-scripts test --env=jsdom",
+        "start": "react-scripts start",
+        "eject": "react-scripts eject",
+        "build": "react-scripts build"
+    },
+    "dependencies": {
+        "enzyme": "3.7.0",
+        "enzyme-adapter-react-16": "1.6.0",
+        "react-dom": "next",
+        "react-scripts": "2.0.3",
+        "react": "next"
+    }
 }

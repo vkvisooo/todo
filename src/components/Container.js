@@ -1,7 +1,7 @@
 import React, { useContext, useState, useReducer } from "react";
 
-import TodoList from "./TodoList";
-import TodoForm from "./TodoForm";
+import TodoList from "./TodoLists";
+import TodoForm from "./TodoForms";
 import Store from "../context/context";
 import Input from "./Input";
 

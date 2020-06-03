@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Store from "../context/context";
-import { TodoHeader } from "./TodoHeader";
+import { TodoHeader } from "./TodoHeaders";
 
 export default function TodoList(props) {
   const activeTodo = props.activeTodo.split(' ').join('_');
