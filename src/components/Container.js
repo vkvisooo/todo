@@ -4,11 +4,14 @@ import TodoList from "./TodoLists";
 import TodoForm from "./TodoForms";
 import Store from "../context/context";
 import Input from "./Input";
+import empty from "../images/empty.jpg"
 
 export default function Container() {
     const { state, dispatch } = useContext(Store);
     const [todoTypeList, setTodoTypeList] = useState('')
     const [activeTodo, setActiveTodo] = useState(state.todoTypelist[0])
+
+    if (state.todoTypeList && !state.todoTypeList.includes(activeTodo)) setActiveTodo(state.todoTypelist[0])
 
     const handleTodoChange = (e) => {
         setTodoTypeList(e.target.value)
@@ -34,13 +37,13 @@ export default function Container() {
         <div className="col-12 pt-4 row justify-content-between">
             <section className="col-4">
                 <Input {...props} />
-                {state.todoTypelist.includes(todoTypeList) &&
+                {state.todoTypelist && state.todoTypelist.includes(todoTypeList) &&
                     <p className="text-danger pt-2 mb-0">Already exist</p>
                 }
                 <br />
-                <h6 className="mb-1">Todo Types</h6>
-                {state.todoTypelist.length > 0 && (<div className="row">
+                {state.todoTypelist.length ? (<div className="row">
                     <div className="col-md-12">
+                        <h6 className="mb-1">Todo Types</h6>
                         <ul className="list-group">
                             {state.todoTypelist.length > 0 && state.todoTypelist.map(t => (
                                 <li key={t} className="list-group-item" onClick={() => setActiveTodo(t)}>
@@ -50,7 +53,7 @@ export default function Container() {
                         </ul>
                     </div>
                 </div>
-                )}
+                ) : <img src={empty} alt="list empty" />}
             </section>
             <section className="col-7">
                 <TodoForm activeTodo={activeTodo} />

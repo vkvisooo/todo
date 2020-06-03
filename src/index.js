@@ -7,6 +7,7 @@ import reducer from './reducer/reducer';
 import { usePersistedContext, usePersistedReducer } from './usePersists';
 
 import Container from './components/Container';
+import todoIcon from './images/todoIcon.svg'
 
 
 function App() { 
@@ -17,12 +18,15 @@ function App() {
 
   // `todos` will be a state manager to manage states. 
   const [state, dispatch] = usePersistedReducer(useReducer(reducer, globalStore),'state');
+  console.log(state, 'main state');
   return ( 
     // Store.Provider passes the state and dispatcher to the down.
     <Store.Provider value={{ state, dispatch }}> 
       <div className="d-flex justify-content-center align-items-center">
         <div className="col-12">
-          <h3 className="pt-3 text-center">H2 Project 2019</h3>
+          <h3 className="pt-3 text-center text-info">Todo List
+           <span className="pl-1"> <img width="30" src={todoIcon}/></span>
+          </h3>
           <Container />
         </div>
       </div>

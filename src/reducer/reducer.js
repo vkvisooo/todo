@@ -13,7 +13,6 @@ const addTodo = (state, payload) => {
 const deleteTodo = (state, {key, todo}) => {
   let newTodoList = { ...state.todoListData }
   const filterTodo = newTodoList[key].filter((t) => t !== todo);
-  debugger;
   if (!filterTodo.length) {
     delete newTodoList[key];
     return { ...newTodoList };
@@ -36,34 +35,34 @@ const addTodoDetail = (state, payload) => {
   return newTodoTypelist;
 }
 
-export default function reducer(state = initalValues, action) {
-  switch (action.type) {
+export default function reducer(state = initalValues, {payload, type}) {
+  switch (type) {
     case "ADD_TODO":
       // return current state if empty
-      if (!action.payload) {
+      if (!payload) {
         return state;
       }
       // return current state if duplicate
-      if (state.todoListData[action.payload.key].includes(action.payload.todo)) {
+      if ( state.todoListData[payload.key] && state.todoListData[payload.key].includes(payload.todo)) {
         return state;
       }
       return {
         ...state,
-        todoListData: addTodo(state, action.payload),  
+        todoListData: addTodo(state, payload),  
       };
     case "COMPLETE":
       return {
         ...state,
         backup: { ...state.todoListData },
-        todoListData: deleteTodo(state, action.payload),
-        todoTypelist: deteteTodoDetail(state, action.payload)
+        todoListData: deleteTodo(state, payload),
+        todoTypelist: deteteTodoDetail(state, payload)
       };
     
     case "TODO_TYPE_LIST":
-      if (state.todoTypelist.includes(action.payload)) return state;
+      if (state.todoTypelist.includes(payload)) return state;
       return {
         ...state,
-        todoTypelist: addTodoDetail(state, action.payload),
+        todoTypelist: addTodoDetail(state, payload),
       }
       
     default:

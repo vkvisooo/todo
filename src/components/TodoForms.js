@@ -33,10 +33,11 @@ export default function TodoForm(props) {
     handleClick: handleTodoAdd,
   }
   console.log('Form render')
+  const todoListData =  state.todoListData[props.activeTodo]
   return (
     <>
       <Input {...inputProps}/>
-      {state.todoListData[props.activeTodo].includes(todo) && 
+      {todoListData && todoListData.includes(todo) && 
         <p className="text-danger pt-2 mb-0">Already exist</p>
       }
     </>

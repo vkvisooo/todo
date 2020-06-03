@@ -17,7 +17,7 @@ const Store = React.createContext({
       "Query 4"
     ],
   },
-  todoTypelist: ['Meetings', 'Project Queries']
+  todoTypelist: ['Meetings', 'Project_Queries']
 });
 
 export default Store;

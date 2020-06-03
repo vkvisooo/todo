@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import Store from "../context/context";
 import { TodoHeader } from "./TodoHeaders";
+import empty from "../images/empty.jpg"
 
-export default function TodoList(props) {
-  const activeTodo = props.activeTodo.split(' ').join('_');
+export default function TodoList({activeTodo}) {
   const { state, dispatch } = useContext(Store);
   const todoList = state.todoListData[activeTodo] || [];
 
@@ -12,7 +12,9 @@ export default function TodoList(props) {
 
   let header =
     todoList.length === 0 ? (
-      <h4>Nothing to show, create todos</h4>
+      <div className="d-flex justify-content-center pt-1">
+        <img className="m-auto" src={empty} alt="empty screen" />
+      </div>
     ) : (
         <TodoHeader>
           <span className="float-right">{pluralize(todoList.length)}</span>
