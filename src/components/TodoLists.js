@@ -3,7 +3,7 @@ import Store from "../context/context";
 import { TodoHeader } from "./TodoHeaders";
 import empty from "../images/empty.jpg"
 
-export default function TodoList({activeTodo}) {
+export default function TodoList({ activeTodo }) {
   const { state, dispatch } = useContext(Store);
   const todoList = state.todoListData[activeTodo] || [];
 
@@ -23,26 +23,24 @@ export default function TodoList({activeTodo}) {
   console.log('list render')
   return (
     <div className="row">
-      <div className="col-md-12">
+      <div className="col-12">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-12">
             <br />
             {header}
           </div>
         </div>
         {todoList && todoList.length > 0 && (<div className="row">
-          <div className="col-md-12">
+          <div className="col-12">
             <ul className="list-group">
               {todoList.map(todo => (
-                <li key={todo} className="list-group-item">
+                <li key={todo} className="list-group-item py-2">
                   {todo}
                   <button
                     className="float-right btn btn-success btn-sm"
                     style={{ marginLeft: 10 }}
                     onClick={() => dispatch({ type: "COMPLETE", payload: { key: activeTodo, todo } })}
-                  >
-                    Mark Done
-                  </button>
+                  >Mark Done</button>
                 </li>
               ))}
             </ul>

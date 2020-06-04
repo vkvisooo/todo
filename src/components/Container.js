@@ -4,7 +4,8 @@ import TodoList from "./TodoLists";
 import TodoForm from "./TodoForms";
 import Store from "../context/context";
 import Input from "./Input";
-import empty from "../images/empty.jpg"
+import empty from "../images/empty.jpg";
+import Divider from "./Divider";
 
 export default function Container() {
     const { state, dispatch } = useContext(Store);
@@ -34,19 +35,19 @@ export default function Container() {
     }
     console.log('container render')
     return (
-        <div className="col-12 pt-4 row justify-content-between">
-            <section className="col-4">
+        <div className="col-12 pt-4 px-0 row ml-0 justify-content-between">
+            <section className="col-12 col-md-4 px-0">
                 <Input {...props} />
                 {state.todoTypelist && state.todoTypelist.includes(todoTypeList) &&
                     <p className="text-danger pt-2 mb-0">Already exist</p>
                 }
                 <br />
                 {state.todoTypelist.length ? (<div className="row">
-                    <div className="col-md-12">
+                    <div className="col-12">
                         <h6 className="mb-1">Todo Types</h6>
                         <ul className="list-group">
                             {state.todoTypelist.length > 0 && state.todoTypelist.map(t => (
-                                <li key={t} className="list-group-item" onClick={() => setActiveTodo(t)}>
+                                <li key={t} className="list-group-item py-2" onClick={() => setActiveTodo(t)}>
                                     {t}
                                 </li>
                             ))}
@@ -55,7 +56,8 @@ export default function Container() {
                 </div>
                 ) : <img src={empty} alt="list empty" />}
             </section>
-            <section className="col-7">
+            <section className="col-12 col-md-6 px-0">
+                <Divider text="Todo List" className="mt-3 d-md-none" />
                 <TodoForm activeTodo={activeTodo} />
                 <TodoList activeTodo={activeTodo} />
             </section>
