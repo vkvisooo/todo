@@ -1,6 +1,8 @@
 import React from "react";
 
-export const TodoHeader = (props) => (
+const TodoHeader = (props) => {
+  console.log('render Todo Header')
+return (
   <div className="row">
     <div className="col-8">
       <h5>List of Todos</h5>
@@ -9,4 +11,6 @@ export const TodoHeader = (props) => (
       {props.children}
     </div>
   </div>
-);
+)}
+
+export default React.memo(TodoHeader)

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Store from "../context/context";
-import { TodoHeader } from "./TodoHeaders";
+import TodoHeader from "./TodoHeaders";
 import empty from "../images/empty.jpg"
 
 export default function TodoList({ activeTodo }) {

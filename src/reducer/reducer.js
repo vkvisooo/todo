@@ -1,12 +1,14 @@
-const initalValues = {
-  todoTypelist: [],
+const initialValues = {
+  todoTypeList: [],
   todoListData: {}
 }
 
 const addTodo = (state, payload) => {
   const newTodoList = { ...state.todoListData }
-  newTodoList[payload.key] = newTodoList[payload.key] ? [...newTodoList[payload.key]] : [];
-  newTodoList[payload.key].push(payload.todo);
+  if (payload.todo) {
+    newTodoList[payload.key] = newTodoList[payload.key] ? [...newTodoList[payload.key]] : [];
+    newTodoList[payload.key].push(payload.todo);
+  }
   return newTodoList;
 }
 
@@ -20,22 +22,22 @@ const deleteTodo = (state, {key, todo}) => {
   return {...newTodoList, [key]: filterTodo };
 }
 
-const deteteTodoDetail = (state, {key}) => {
+const deleteTodoDetail = (state, {key}) => {
   const newTodoList = { ...state.todoListData };
-  let newTodoTypelist = [ ...state.todoTypelist ];
+  let newTodoTypeList = [ ...state.todoTypeList ];
   if (newTodoList[key].length === 1) {
-    newTodoTypelist =  newTodoTypelist.filter(list => list !== key);
+    newTodoTypeList =  newTodoTypeList.filter(list => list !== key);
   }
-  return newTodoTypelist;
+  return newTodoTypeList;
 }
 
 const addTodoDetail = (state, payload) => {
-  const newTodoTypelist = [ ...state.todoTypelist ] 
-  newTodoTypelist.push(payload);
-  return newTodoTypelist;
+  const newTodoTypeList = [ ...state.todoTypeList ] 
+  if (payload) newTodoTypeList.push(payload);
+  return newTodoTypeList;
 }
 
-export default function reducer(state = initalValues, {payload, type}) {
+export default function reducer(state = initialValues, {payload, type}) {
   switch (type) {
     case "ADD_TODO":
       // return current state if empty
@@ -53,16 +55,15 @@ export default function reducer(state = initalValues, {payload, type}) {
     case "COMPLETE":
       return {
         ...state,
-        backup: { ...state.todoListData },
         todoListData: deleteTodo(state, payload),
-        todoTypelist: deteteTodoDetail(state, payload)
+        todoTypeList: deleteTodoDetail(state, payload)
       };
     
     case "TODO_TYPE_LIST":
-      if (state.todoTypelist.includes(payload)) return state;
+      if (state.todoTypeList.includes(payload)) return state;
       return {
         ...state,
-        todoTypelist: addTodoDetail(state, payload),
+        todoTypeList: addTodoDetail(state, payload),
       }
       
     default:

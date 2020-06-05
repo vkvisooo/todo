@@ -7,16 +7,30 @@ export default function TodoForm(props) {
 
   // Creating a local state to have currently writing
   // todo item that will be sent to the global store.
-  const [todo, setTodo] = useState("");
+  const [todo, setTodo] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
   
 
   console.log(props, 'props');
   function handleTodoChange(e) {
     setTodo(e.target.value);
-    console.log(state, 'state');
+    if(e.target.value.length) setErrorMsg('');
   }
 
   function handleTodoAdd() {
+    const todoListData =  state.todoListData[props.activeTodo];
+    if (!state.todoTypeList) {
+      setErrorMsg('Need to Add Detail first');
+      return;
+
+    } else if(!todo.length) {
+      setErrorMsg('Required Field');
+      return true;
+
+    } else if (todoListData && todoListData.includes(todo)) {
+      setErrorMsg('Already Exist');
+
+    }
     dispatch({ type: "ADD_TODO", payload: { todo, key: props.activeTodo } });
     setTodo("");
   }
@@ -33,12 +47,11 @@ export default function TodoForm(props) {
     handleClick: handleTodoAdd,
   }
   console.log('Form render')
-  const todoListData =  state.todoListData[props.activeTodo]
   return (
     <>
       <Input {...inputProps}/>
-      {todoListData && todoListData.includes(todo) && 
-        <p className="text-danger pt-2 mb-0">Already exist</p>
+      {errorMsg && 
+        <p className="text-danger pt-2 mb-0">{errorMsg}</p>
       }
     </>
   );
