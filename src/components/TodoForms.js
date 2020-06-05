@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Store from "../context/context";
 import Input from "./Input";
 
-export default function TodoForm(props) {
+const TodoForm = (props) => {
   const { state, dispatch } = useContext(Store);
 
   // Creating a local state to have currently writing
@@ -19,7 +19,7 @@ export default function TodoForm(props) {
 
   function handleTodoAdd() {
     const todoListData =  state.todoListData[props.activeTodo];
-    if (!state.todoTypeList) {
+    if (!state.todoTypeList.length) {
       setErrorMsg('Need to Add Detail first');
       return;
 
@@ -33,6 +33,7 @@ export default function TodoForm(props) {
     }
     dispatch({ type: "ADD_TODO", payload: { todo, key: props.activeTodo } });
     setTodo("");
+    setErrorMsg("");
   }
 
   function handleSubmitForm(event) {
@@ -56,3 +57,4 @@ export default function TodoForm(props) {
     </>
   );
 }
+export default React.memo(TodoForm);
