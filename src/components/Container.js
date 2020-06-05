@@ -75,7 +75,7 @@ export default function Container() {
                                     <img onClick={() => handleDeleteTodoType(t, 'alert')} className="btn p-0" width="25px" src={trash} alt="delete btn" />
                                     {warning && (
                                     <div class="alert col-12 col-md-3 alert-warning container fixed-top">
-                                        Are you sure, this will delete <strong>{t}</strong> permanently.
+                                        Are you sure, this will delete the <strong className="text-capitalize">{t} Detail</strong> permanently.
                                         <div className="d-flex justify-content-between pt-2">
                                             <button className="btn" onClick={() => handleDeleteTodoType(t, 'alert')}>No</button>
                                             <button style={{borderColor: "#856404", backgroundColor: "transparent"}} className="btn btn-light" onClick={() => handleDeleteTodoType(t)}>Yes</button>
