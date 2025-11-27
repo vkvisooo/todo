@@ -29,6 +29,6 @@
         "enzyme-adapter-react-16": "1.6.0",
         "react": "next",
         "react-dom": "next",
-        "react-scripts": "2.0.3"
+        "react-scripts": "5.0.1"
     }
 }
